@@ -1,0 +1,15 @@
+python-dotenv
+pydantic
+pydantic-settings
+crewai
+fastapi
+uvicorn
+streamlit
+chromadb
+langchain
+langchain-groq
+langchain-chroma
+langchain-huggingface
+
+
+
