@@ -59,7 +59,7 @@ class MCPClient:
                 "tool_name": tool_name,
                 "arguments": arguments
             }
-            resp = self.session.post(f"{self.base_url}/execute", json=payload, timeout=5)
+            resp = self.session.post(f"{self.base_url}/execute", json=payload, timeout=15)
             resp.raise_for_status()
             return resp.json()
         except requests.exceptions.ConnectionError:
