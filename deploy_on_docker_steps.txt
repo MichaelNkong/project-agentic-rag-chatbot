@@ -1,0 +1,6 @@
+1) build docker image
+
+docker build -t astrarag-chatbot:latest .
+
+2)build container
+docker run -p 8000:8000 -p 8501:8501 -o OPENAI_API_KEY= "ur_api_key" --name astrarag-chatbot-container 1 astrarag-chatbot:latest

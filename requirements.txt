@@ -10,6 +10,13 @@ langchain
 langchain-groq
 langchain-chroma
 langchain-huggingface
+langchain-community
+pytesseract
+unstructured
+unstructured[pdf]
+sentence-transformers
+litellm
+
 
 
 

@@ -21,7 +21,7 @@ __pycache__/
 *.pyc
 
 #ignore vector database
-doc_vector_store/
+ doc_vector_store/
 
-#ignore doc directory
-doc_dir/
+.history/
+
