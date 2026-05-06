@@ -5,8 +5,6 @@ Exposes tools for order status, refunds, and tracking.
 
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
-from enum import Enum
-import json
 from typing import Any, Dict, List, Optional
 
 from src.mcp_server.tools.rag_query_tool import rag_query_tool
