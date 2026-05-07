@@ -1,13 +1,12 @@
 import sys
 import os
-# Add project root to sys.path BEFORE any imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-import json
 import streamlit as st
 import requests
 from src.frontend.config.frontend_settings import Settings
 
 settings = Settings()
+
 
 st.set_page_config(
     page_title="AstraRAG",

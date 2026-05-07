@@ -1,7 +1,9 @@
 import logging
 from fastapi import FastAPI
-from src.backend.api.chat import router as chat_router
+from starlette.middleware.cors import CORSMiddleware
+
 from src.backend.config.backend_settings import Settings
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -9,14 +11,22 @@ logging.basicConfig(
 )
 
 app = FastAPI()
-app.include_router(chat_router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:8501"] for Streamlit
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+#app.include_router(chat_router)
 
 settings = Settings()
+#ensure_vector_db()
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "src.backend.main:app",
-        host=settings.API_HOST,
-        port=settings.API_PORT,
-    )
+#if __name__ == "__main__":
+   # import uvicorn
+   # uvicorn.run(
+    #    "src.backend.main:app",
+      #  host=settings.API_HOST,
+     #   port=settings.API_PORT,
+   # )
