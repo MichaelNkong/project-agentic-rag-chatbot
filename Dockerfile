@@ -1,17 +1,17 @@
-
 FROM python:3.11-slim
+
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt ./
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY .. src/
-COPY doc_dir doc_dir/
-COPY start.sh ./start.sh
+# Copy entire project
+COPY . .
 
 RUN chmod +x start.sh
 
@@ -25,11 +25,7 @@ ENV MODEL_TEMPERATURE=0.0
 ENV API_HOST=0.0.0.0
 ENV API_PORT=8000
 
-# 🔥 fixes
 ENV CREWAI_DISABLE_TELEMETRY=true
 ENV HOME=/tmp
 
-# ⚠️ only OK if single-container setup
-ENV BACKEND_URL=http://localhost:8000/
-
-CMD ["/app/start.sh"]
+CMD ["sh", "start.sh"]
