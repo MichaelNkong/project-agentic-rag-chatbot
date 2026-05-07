@@ -20,7 +20,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-#app.include_router(chat_router)
+app.include_router(chat_router)
 
 settings = Settings()
 
