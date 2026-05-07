@@ -15,7 +15,7 @@ COPY . .
 
 RUN chmod +x start.sh
 
-EXPOSE 8000 8501
+#EXPOSE 8000 8501
 
 ENV DOCUMENTS_DIR=doc_dir
 ENV VECTOR_STORE_DIR=doc_vector_store
