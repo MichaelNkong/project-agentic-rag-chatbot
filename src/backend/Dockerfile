@@ -6,11 +6,11 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt ./
+COPY ../../requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY src/ src/
-COPY doc_dir/ doc_dir/
+COPY .. src/
+COPY ../../doc_dir doc_dir/
 COPY start.sh ./start.sh
 
 RUN chmod +x start.sh

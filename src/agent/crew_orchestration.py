@@ -1,28 +1,17 @@
 
 from src.agent.tasks.question_answer_task import qa_task
-from src.frontend.client import MCPClient
 from src.agent.agents.question_answer_agent import qa_agent
-from src.rag_doc_ingestion.ingest_docs import ensure_vector_db
 from crewai import Crew
+from src.tools.rag_query_tool import rag_query_tool
 class CrewOrchestrator:
-   def __init__(self):
-       self.mcpClient = MCPClient()
 
    def run_rag(self, query: str, chat_history: list):
         print("STARTING RAG")
-        raw = self.mcpClient.query_knowledge_base(query)
+        raw = rag_query_tool(query)
         print("RAW TOOL RESULT:", raw)
-        # 1. Handle MCP failure
-        if raw.get("status") != "success":
-            return {
-                "answer": "The knowledge service is currently unavailable.",
-                "sources": [],
-                "tool_used": "rag_query_tool",
-                "rationale": raw.get("error", "Unknown MCP error")
-            }
 
-        # 2. Normalize
-        result = raw.get("result", {})
+        # 1. Normalize
+        result = raw
 
         print("NORMALIZED RESULT:", result)
 

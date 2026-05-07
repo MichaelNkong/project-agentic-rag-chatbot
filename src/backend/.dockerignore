@@ -11,10 +11,14 @@ __pycache__/
 # Ignore vector store and other large files
 doc_vector_store/
 # Ignore environment files
-.env
+../../.env
 # Ignore OS files
 .DS_Store
 # virtual env
 venv
 .venv
+
+.git
+__pycache__
+doc_vector_store
 

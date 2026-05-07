@@ -1,7 +1,7 @@
 import logging
 
 from src.agent.crew_orchestration import CrewOrchestrator
-
+import json
 logger = logging.getLogger(__name__)
 
 crewOrchestrator = CrewOrchestrator()
@@ -14,10 +14,8 @@ def get_answer(chat_history: list) -> dict:
     # Remove the last user message from chat_history
     history_without_last = chat_history[:-1]
     logger.debug(f"Input data for qa_crew: {chat_history}")
-    result =crewOrchestrator.run_rag(user_query,history_without_last)
-    import json
-
-    # Case 2: CrewAI object with raw
+    result = crewOrchestrator.run_rag(user_query,history_without_last)
+    # Case 1: already parsed dict
     if hasattr(result, "raw"):
         raw = result.raw
 
@@ -26,8 +24,7 @@ def get_answer(chat_history: list) -> dict:
 
         if isinstance(raw, dict):
             return raw
-
-    # Case 1: already parsed dict
+    # Case 2: CrewAI object with raw
     if isinstance(result, dict):
         return result
 
