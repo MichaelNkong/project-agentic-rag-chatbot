@@ -1,21 +1,21 @@
-FROM python:3.11-slim
 
+FROM python:3.11-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy entire project
-COPY . .
+COPY src/ src/
+COPY doc_dir doc_dir/
+COPY start.sh ./start.sh
 
 RUN chmod +x start.sh
 
-#EXPOSE 8000 8501
+EXPOSE 8000 8501
 
 ENV DOCUMENTS_DIR=doc_dir
 ENV VECTOR_STORE_DIR=doc_vector_store
@@ -25,7 +25,11 @@ ENV MODEL_TEMPERATURE=0.0
 ENV API_HOST=0.0.0.0
 ENV API_PORT=8000
 
+# 🔥 fixes
 ENV CREWAI_DISABLE_TELEMETRY=true
 ENV HOME=/tmp
 
-CMD ["sh", "start.sh"]
+# ⚠️ only OK if single-container setup
+ENV BACKEND_URL=http://localhost:8000/
+
+CMD ["/app/start.sh"]
