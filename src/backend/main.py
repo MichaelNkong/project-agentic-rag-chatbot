@@ -5,6 +5,8 @@ from starlette.middleware.cors import CORSMiddleware
 from src.backend.config.backend_settings import Settings
 
 
+
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
@@ -21,7 +23,7 @@ app.add_middleware(
 #app.include_router(chat_router)
 
 settings = Settings()
-#ensure_vector_db()
+
 
 #if __name__ == "__main__":
    # import uvicorn
