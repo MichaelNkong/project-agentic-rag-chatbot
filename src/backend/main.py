@@ -19,7 +19,6 @@ logging.basicConfig(
 
 app = FastAPI()
 print("IMPORTING ROUTER")
-app.include_router(chat_router)
 print("ROUTER INCLUDED")
 app.add_middleware(
     CORSMiddleware,
