@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-
+from src.backend.api.chat import  router as chat_router
 from src.backend.config.backend_settings import Settings
 
 
@@ -13,6 +13,7 @@ logging.basicConfig(
 )
 
 app = FastAPI()
+app.include_router(chat_router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # or ["http://localhost:8501"] for Streamlit
@@ -20,7 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(chat_router)
+
 
 settings = Settings()
 
