@@ -4,7 +4,6 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
-from src.backend.api.chat import  router as chat_router
 from src.backend.config.backend_settings import Settings
 from src.backend.services.chat import get_answer
 
