@@ -3,9 +3,11 @@ import logging
 from src.agent.crew_orchestration import CrewOrchestrator
 import json
 logger = logging.getLogger(__name__)
-
-crewOrchestrator = CrewOrchestrator()
+crewOrchestrator = None
 def get_answer(chat_history: list) -> dict:
+    global crewOrchestrator
+    if crewOrchestrator is None:
+        crewOrchestrator = CrewOrchestrator()
     logger.info(f"Received chat_history: {chat_history}")
     # get the last message in the chat_history as user_query
     last_user_message = chat_history[-1]
