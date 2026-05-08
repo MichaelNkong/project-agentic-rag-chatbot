@@ -1,14 +1,15 @@
 
-from src.agent.tasks.question_answer_task import qa_task
-from src.agent.agents.question_answer_agent import qa_agent
-from crewai import Crew
 
-from src.rag_doc_ingestion.ingest_docs import ensure_vector_db
-from src.tools.rag_query_tool import rag_query_tool
 class CrewOrchestrator:
 
    def run_rag(self, query: str, chat_history: list):
         print("STARTING RAG")
+        from src.agent.tasks.question_answer_task import qa_task
+        from src.agent.agents.question_answer_agent import qa_agent
+        from crewai import Crew
+
+        from src.rag_doc_ingestion.ingest_docs import ensure_vector_db
+        from src.tools.rag_query_tool import rag_query_tool
         ensure_vector_db()
         raw = rag_query_tool(query)
         print("RAW TOOL RESULT:", raw)
