@@ -1,11 +1,12 @@
 import logging
 
-from src.agent.crew_orchestration import CrewOrchestrator
-import json
-logger = logging.getLogger(__name__)
-crewOrchestrator = None
+
 def get_answer(chat_history: list) -> dict:
+    from src.agent.crew_orchestration import CrewOrchestrator
+    import json
+    logger = logging.getLogger(__name__)
     global crewOrchestrator
+    crewOrchestrator = None
     if crewOrchestrator is None:
         crewOrchestrator = CrewOrchestrator()
     logger.info(f"Received chat_history: {chat_history}")
