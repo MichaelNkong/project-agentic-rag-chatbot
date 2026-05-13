@@ -25,10 +25,10 @@ app.include_router(chat_router)
 settings = Settings()
 
 
-#if __name__ == "__main__":
-   # import uvicorn
-   # uvicorn.run(
-    #    "src.backend.main:app",
-      #  host=settings.API_HOST,
-     #   port=settings.API_PORT,
-   # )
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "src.backend.main:app",
+        host=settings.API_HOST,
+       port=settings.API_PORT,
+   )

@@ -1,7 +1,7 @@
 # Agentic RAG Chatbot (Dockerized)
 # 🚀 Demo
-A simple demo of the RAG Chatbot is shown below. A user can ask questions about contents in documents(Cloud computing and requiement Engineering)
-and gets retrieved answer based on similarity search:
+A simple demo of the RAG Chatbot is shown below. A user can ask questions about contents in documents(Cloud computing and requiement Engineering and gets retrieved answer based on similarity search:
+
 
 A production-ready **Retrieval-Augmented Generation (RAG)** chatbot built with a modular backend architecture using Docker.
 This project demonstrates practical skills in **LLM integration, backend engineering, agent orchestration, and containerized deployment**.
