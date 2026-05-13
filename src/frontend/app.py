@@ -33,7 +33,7 @@ for message in st.session_state.chat_history:
                     st.markdown(f"**Tool Used:** {tool_used if tool_used else 'N/A'}")
                     st.markdown(f"**Rationale:** {rationale if rationale else 'N/A'}")
 
-user_prompt = st.chat_input("Ask Chatbot...")
+user_prompt = st.chat_input("Ask Chatbot Questions About Cloud Computing or Requirement Engineering...")
 
 if user_prompt:
     st.chat_message("user").markdown(user_prompt)

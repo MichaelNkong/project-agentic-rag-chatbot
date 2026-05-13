@@ -1,89 +1,171 @@
-# 🤖 Agentic RAG Chatbot (Dockerized)
+# Agentic RAG Chatbot (Dockerized)
+# 🚀 Demo
+A simple demo of the RAG Chatbot is shown below. A user can ask questions about contents in documents(Cloud computing and requiement Engineering)
+and gets retrieved answer based on similarity search:
 
-A production-ready **Retrieval-Augmented Generation (RAG)** chatbot built with a modular, service-oriented architecture using Docker.
-This project demonstrates end-to-end skills in **LLM integration, backend engineering, testability, and system design**.
+A production-ready **Retrieval-Augmented Generation (RAG)** chatbot built with a modular backend architecture using Docker.
+This project demonstrates practical skills in **LLM integration, backend engineering, agent orchestration, and containerized deployment**.
 
 ---
 
-## 🚀 Overview
+# 🚀 Overview
 
 This application allows users to query a knowledge base using natural language.
-It combines semantic search with LLM reasoning to provide accurate, context-aware responses.
+It combines semantic document retrieval with LLM reasoning to generate context-aware responses.
 
-### ✨ Key Features
-
-* 🔍 Semantic document retrieval (vector search)
-* 🧠 LLM-powered answer generation
-* ⚙️ Modular microservice architecture (API + MCP service)
-* 🐳 Fully containerized with Docker
-* 🔌 Extensible tool-based design (agentic workflow)
-* 📈 Logging and observability for debugging
+The system uses a custom `rag_query_tool` integrated directly into the service layer for retrieval and response generation.
 
 ---
 
-## 🧱 Architecture
+# ✨ Key Features
 
+- 🔍 Semantic document retrieval using vector embeddings
+- 🧠 LLM-powered response generation
+- 🔌 Custom `rag_query_tool` for RAG workflows
+- 🤖 Agent-based orchestration with CrewAI
+- 🐳 Fully containerized with Docker
+- 📄 Automated document ingestion pipeline
+- 📈 Logging and debugging support
+- ⚙️ Modular and testable backend structure
+
+---
+
+# 🧱 Architecture
+
+```text
+User → FastAPI Backend → Service Layer → rag_query_tool → LLM
+                                                ↓
+                                          Vector Store
 ```
-User → FastAPI Backend → RAG Pipeline → MCP Service → LLM
-                                 ↓
-                           Vector Store
+
+---
+
+# 🧩 Core Components
+
+## FastAPI Backend
+
+Handles incoming API requests and routes chat interactions through the service layer.
+
+Location:
+
+```text
+src/backend/
 ```
 
-### Components:
+---
 
-* **API Service (FastAPI)**
-  Handles user requests and orchestrates the RAG pipeline
+## Service Layer
 
-* **MCP Service**
-  Responsible for processing knowledge queries and integrating with tools
+Contains business logic and orchestrates the chatbot workflow.
 
-* **Vector Store**
-  Stores embeddings for semantic search
+Location:
 
-* **LLM Integration**
-  Generates final responses based on retrieved context
+```text
+src/backend/services/chat.py
+```
 
 ---
 
-## 🛠 Tech Stack
+## RAG Query Tool
 
-* **Backend:** Python, FastAPI
-* **RAG Pipeline:** Custom implementation (retrieval + ranking)
-* **LLM:** OpenAI API
-* **Vector Search:** Embedding-based similarity search
-* **Orchestration:** Docker, Docker Compose
-* **Tooling:** CrewAI (agent-based workflow)
-* **Testing & QA mindset:** Designed with testability and modularity in mind
+Custom retrieval tool responsible for:
+
+- Querying vector embeddings
+- Retrieving relevant documents
+- Building contextual prompts
+- Sending prompts to the LLM
+- Returning grounded responses
+
+Location:
+
+```text
+src/tools/rag_query_tool.py
+```
 
 ---
 
-## 🐳 Running with Docker
+## Document Ingestion Pipeline
 
-### 1. Build the image
+Processes and ingests documents into the vector store.
+
+Location:
+
+```text
+src/rag_doc_ingestion/
+```
+
+Main ingestion script:
+
+```text
+src/rag_doc_ingestion/ingest_docs.py
+```
+
+---
+
+## Agent Orchestration
+
+CrewAI agents and orchestration logic.
+
+Location:
+
+```text
+src/agent/
+```
+
+---
+
+# 🛠 Tech Stack
+
+- **Backend:** Python, FastAPI
+- **LLM:** OpenAI API
+- **Agent Framework:** CrewAI
+- **RAG Workflow:** Custom `rag_query_tool`
+- **Vector Search:** Embedding similarity search
+- **Containerization:** Docker
+- **Observability:** Python logging
+- **Environment Management:** `.env`
+
+---
+
+# 🐳 Running with Docker
+
+## 1. Build the Docker image
 
 ```bash
 docker build -t rag-chatbot .
 ```
 
-### 2. Run with Docker Compose
+---
+
+## 2. Create the container
 
 ```bash
-docker-compose up -d
+docker run -d --name rag-chatbot -p 8000:8000 rag-chatbot
 ```
 
-### 3. Access the API
+---
 
+## 3. Start the container
+
+```bash
+docker start rag-chatbot
 ```
+
+---
+
+## 4. Access the API
+
+```text
 http://localhost:8000
 ```
 
 ---
 
-## ⚙️ Environment Variables
+# ⚙️ Environment Variables
 
-Create a `.env` file or set variables manually:
+Create a `.env` file:
 
-```
+```env
 OPENAI_API_KEY=your_api_key
 CREWAI_DISABLE_TELEMETRY=true
 HOME=/tmp
@@ -91,21 +173,26 @@ HOME=/tmp
 
 ---
 
-## 🔌 API Example
+# 🔌 API Example
 
-**POST /chat/answer**
+## POST `/chat/answer`
 
-Request:
+### Request
 
 ```json
 {
   "chat_history": [
-    {"role": "user", "content": "What is a RESTful API?"}
+    {
+      "role": "user",
+      "content": "What is a RESTful API?"
+    }
   ]
 }
 ```
 
-Response:
+---
+
+### Response
 
 ```json
 {
@@ -117,82 +204,116 @@ Response:
 
 ---
 
-## ⚠️ Challenges & Solutions
+# ⚠️ Challenges & Solutions
 
-### 🧩 Service Communication (Docker Networking)
+## 🔄 Simplifying Architecture
 
-* **Problem:** `localhost` not working between containers
-* **Solution:** Used Docker service names (e.g. `mcp:5001`)
-
-### ⏱ Timeout Issues in RAG Pipeline
-
-* **Problem:** MCP service timing out
-* **Solution:** Increased HTTP timeout and optimized request handling
-
-### 🔐 Secret Management
-
-* **Problem:** API key exposure blocked by GitHub
-* **Solution:** Removed secrets from history and used environment variables
-
-### ⚙️ CrewAI Initialization in Containers
-
-* **Problem:** Encryption key error
-* **Solution:** Set writable `HOME` directory and disabled telemetry
+- **Problem:** Maintaining a separate MCP server increased deployment complexity.
+- **Solution:** Moved tool execution directly into the backend service layer.
 
 ---
 
-## 📦 Project Structure
+## ⏱ RAG Workflow Optimization
 
-```
-.
-├── src/
-│   ├── api/
-│   ├── mcp_server/
-│   └── tools/
+- **Problem:** Additional service communication added unnecessary latency.
+- **Solution:** Direct invocation of `rag_query_tool` improved performance and maintainability.
+
+---
+
+## 🔐 Secret Management
+
+- **Problem:** Risk of exposing API keys during development.
+- **Solution:** Used environment variables and `.gitignore` protection.
+
+---
+
+## ⚙️ Docker Runtime Issues
+
+- **Problem:** CrewAI encryption and permission issues inside containers.
+- **Solution:** Configured writable `HOME` directory and disabled telemetry.
+
+---
+
+# 📦 Project Structure
+
+```text
+project-agentic-rag-chatbot/
+│
 ├── doc_dir/
-├── vector_store/
+│
+├── src/
+│   ├── agent/
+│   │   ├── agents/
+│   │   ├── config/
+│   │   ├── llm/
+│   │   │   ├── llm_configuration.py
+│   │   │   └── load_llm.py
+│   │   ├── tasks/
+│   │   ├── crew.py
+│   │   └── crew_orchestration.py
+│   │
+│   ├── backend/
+│   │   ├── api/
+│   │   ├── config/
+│   │   ├── services/
+│   │   │   └── chat.py
+│   │   └── main.py
+│   │
+│   ├── rag_doc_ingestion/
+│   │   ├── config/
+│   │   └── ingest_docs.py
+│   │
+│   └── tools/
+│       └── rag_query_tool.py
+│
 ├── Dockerfile
-├── docker-compose.yml
-└── start.sh
+├── start.sh
+├── requirements.txt
+├── runtime.txt
+├── .env
+└── README.md
 ```
 
 ---
 
-## 🧠 What This Project Demonstrates
+# 🧠 What This Project Demonstrates
 
-* Designing scalable RAG systems
-* Debugging distributed services (timeouts, networking)
-* Containerization and environment isolation
-* Secure handling of secrets and API keys
-* Applying QA thinking to backend systems
-
----
-
-## 🎯 Future Improvements
-
-* Add caching layer for faster responses
-* Introduce async processing for MCP service
-* Deploy to cloud (AWS EC2 / ECS)
-* Add authentication & rate limiting
-* Improve observability (metrics, tracing)
+- Building production-style RAG systems
+- Designing modular AI backend architectures
+- Agent orchestration with CrewAI
+- Semantic search integration
+- Containerized application deployment
+- Secure configuration handling
+- Backend debugging and observability
 
 ---
 
-## 👨‍💻 Author
+# 🎯 Future Improvements
+
+- Add response caching
+- Implement async task processing
+- Add authentication and rate limiting
+- Improve observability with metrics and tracing
+- Deploy to cloud infrastructure (AWS ECS / EC2)
+- Add CI/CD pipelines for automated deployment
+
+---
+
+# 👨‍💻 Author
 
 Michael
 Software Engineer | Test Automation | Backend & AI Systems
 
 ---
 
-## ⭐ Why this project matters
+# ⭐ Why This Project Matters
 
-This project reflects real-world challenges:
+This project reflects real-world engineering challenges in AI systems:
 
-* Distributed system debugging
-* LLM integration under constraints
-* Production-like environment setup
+- LLM integration
+- RAG workflow design
+- Backend modularization
+- Containerized deployment
+- Performance optimization
 
-It showcases not just coding ability, but **engineering thinking**.
-
----
+It showcases not only coding ability, but also **software engineering and system design thinking**.
