@@ -1,6 +1,6 @@
 #  Agentic RAG Chatbot (Dockerized)
 # 🚀 Demo
-A simple demo of the RAG Chatbot is shown below. A user can ask questions about contents in documents(Cloud computing and requiraddement Engineering and gets retrieved answer based on similarity search:
+A simple demo of the RAG Chatbot is shown below. A user can ask questions about contents in documents(Cloud computing and requirement Engineering and gets retrieved answer based on similarity search:
 
 [demo1.mp4](..%2F..%2FDownloads%2Fdemo1.mp4)
 
@@ -33,11 +33,9 @@ The system uses a custom `rag_query_tool` integrated directly into the service l
 
 # 🧱 Architecture
 
-```text
+
 User → FastAPI Backend → Service Layer → rag_query_tool → LLM
                                                 ↓
-                                          Vector Store
-```
 
 # 🧩 Core Components
 
@@ -46,20 +44,14 @@ User → FastAPI Backend → Service Layer → rag_query_tool → LLM
 Handles incoming API requests and routes chat interactions through the service layer.
 
 Location:
-
-```text
 src/backend/
-```
 
 ## Service Layer
 
 Contains business logic and orchestrates the chatbot workflow.
 
 Location:
-
-```text
 src/backend/services/chat.py
-```
 
 
 ## RAG Query Tool
@@ -73,27 +65,17 @@ Custom retrieval tool responsible for:
 - Returning grounded responses
 
 Location:
-
-```text
 src/tools/rag_query_tool.py
-```
-
-
 ## Document Ingestion Pipeline
 
 Processes and ingests documents into the vector store.
 
 Location:
-
-```text
 src/rag_doc_ingestion/
-```
 
 Main ingestion script:
 
-```text
 src/rag_doc_ingestion/ingest_docs.py
-```
 
 
 ## Agent Orchestration
@@ -101,10 +83,8 @@ src/rag_doc_ingestion/ingest_docs.py
 CrewAI agents and orchestration logic.
 
 Location:
-
-```text
 src/agent/
-```
+
 
 # 🛠 Tech Stack
 
@@ -123,29 +103,22 @@ src/agent/
 
 ## 1. Build the Docker image
 
-```bash
 docker build -t rag-chatbot .
-```
+
 
 ## 2. Create the container
+docker run -d --name -e API_KEY ="" rag-chatbot -p 8000:8000 rag-chatbot
 
-```bash
-docker run -d --name rag-chatbot -p 8000:8000 rag-chatbot
-```
 
 ## 3. Start the container
 
-```bash
-docker start rag-chatbot
-```
 
----
+docker start rag-chatbot
+
 
 ## 4. Access the API
-
-```text
 http://localhost:8000
-```
+
 
 # ⚙️ Environment Variables
 
@@ -216,7 +189,6 @@ HOME=/tmp
 
 # 📦 Project Structure
 
-```text
 project-agentic-rag-chatbot/
 │
 ├── doc_dir/
@@ -252,7 +224,6 @@ project-agentic-rag-chatbot/
 ├── runtime.txt
 ├── .env
 └── README.md
-```
 
 # 🧠 What This Project Demonstrates
 
@@ -278,7 +249,6 @@ project-agentic-rag-chatbot/
 ---
 
 # 👨‍💻 Author
-
 Michael
 Software Engineer | Test Automation | Backend & AI Systems
 
