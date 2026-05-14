@@ -39,8 +39,6 @@ User → FastAPI Backend → Service Layer → rag_query_tool → LLM
                                           Vector Store
 ```
 
----
-
 # 🧩 Core Components
 
 ## FastAPI Backend
@@ -53,8 +51,6 @@ Location:
 src/backend/
 ```
 
----
-
 ## Service Layer
 
 Contains business logic and orchestrates the chatbot workflow.
@@ -65,7 +61,6 @@ Location:
 src/backend/services/chat.py
 ```
 
----
 
 ## RAG Query Tool
 
@@ -83,7 +78,6 @@ Location:
 src/tools/rag_query_tool.py
 ```
 
----
 
 ## Document Ingestion Pipeline
 
@@ -101,7 +95,6 @@ Main ingestion script:
 src/rag_doc_ingestion/ingest_docs.py
 ```
 
----
 
 ## Agent Orchestration
 
@@ -112,8 +105,6 @@ Location:
 ```text
 src/agent/
 ```
-
----
 
 # 🛠 Tech Stack
 
@@ -136,15 +127,11 @@ src/agent/
 docker build -t rag-chatbot .
 ```
 
----
-
 ## 2. Create the container
 
 ```bash
 docker run -d --name rag-chatbot -p 8000:8000 rag-chatbot
 ```
-
----
 
 ## 3. Start the container
 
@@ -160,8 +147,6 @@ docker start rag-chatbot
 http://localhost:8000
 ```
 
----
-
 # ⚙️ Environment Variables
 
 Create a `.env` file:
@@ -171,8 +156,6 @@ OPENAI_API_KEY=your_api_key
 CREWAI_DISABLE_TELEMETRY=true
 HOME=/tmp
 ```
-
----
 
 # 🔌 API Example
 
@@ -191,8 +174,6 @@ HOME=/tmp
 }
 ```
 
----
-
 ### Response
 
 ```json
@@ -202,8 +183,6 @@ HOME=/tmp
   "tool_used": "rag_query_tool"
 }
 ```
-
----
 
 # ⚠️ Challenges & Solutions
 
@@ -274,8 +253,6 @@ project-agentic-rag-chatbot/
 ├── .env
 └── README.md
 ```
-
----
 
 # 🧠 What This Project Demonstrates
 
