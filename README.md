@@ -33,9 +33,11 @@ The system uses a custom `rag_query_tool` integrated directly into the service l
 
 # 🧱 Architecture
 
-
+```text
 User → FastAPI Backend → Service Layer → rag_query_tool → LLM
                                                 ↓
+                                          Vector Store
+```
 
 # 🧩 Core Components
 
@@ -44,15 +46,18 @@ User → FastAPI Backend → Service Layer → rag_query_tool → LLM
 Handles incoming API requests and routes chat interactions through the service layer.
 
 Location:
+
+```text
 src/backend/
-
+```
 ## Service Layer
-
 Contains business logic and orchestrates the chatbot workflow.
 
 Location:
-src/backend/services/chat.py
 
+```text
+src/backend/services/chat.py
+```
 
 ## RAG Query Tool
 
@@ -65,27 +70,36 @@ Custom retrieval tool responsible for:
 - Returning grounded responses
 
 Location:
+
+```text
 src/tools/rag_query_tool.py
+```
+
 ## Document Ingestion Pipeline
 
 Processes and ingests documents into the vector store.
 
 Location:
+
+```text
 src/rag_doc_ingestion/
+```
 
 Main ingestion script:
 
+```text
 src/rag_doc_ingestion/ingest_docs.py
-
+```
 
 ## Agent Orchestration
 
 CrewAI agents and orchestration logic.
 
 Location:
+
+```text
 src/agent/
-
-
+```
 # 🛠 Tech Stack
 
 - **Backend:** Python, FastAPI
@@ -103,22 +117,29 @@ src/agent/
 
 ## 1. Build the Docker image
 
+```bash
 docker build -t rag-chatbot .
-
+```
 
 ## 2. Create the container
-docker run -d --name -e API_KEY ="" rag-chatbot -p 8000:8000 rag-chatbot
 
+```bash
+docker run -d --name -e API_KEY="" rag-chatbot -p 8000:8000 rag-chatbot
+```
 
 ## 3. Start the container
 
-
+```bash
 docker start rag-chatbot
+```
 
+---
 
 ## 4. Access the API
-http://localhost:8000
 
+```text
+http://localhost:8000
+```
 
 # ⚙️ Environment Variables
 
@@ -189,6 +210,7 @@ HOME=/tmp
 
 # 📦 Project Structure
 
+```text
 project-agentic-rag-chatbot/
 │
 ├── doc_dir/
@@ -224,6 +246,7 @@ project-agentic-rag-chatbot/
 ├── runtime.txt
 ├── .env
 └── README.md
+```
 
 # 🧠 What This Project Demonstrates
 
@@ -249,6 +272,7 @@ project-agentic-rag-chatbot/
 ---
 
 # 👨‍💻 Author
+
 Michael
 Software Engineer | Test Automation | Backend & AI Systems
 
